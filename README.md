@@ -61,5 +61,10 @@ python manage.py test
 ## Organización del trabajo
 
 - Tablero en Jira: proyecto SITDE.
-- Una rama por tarea (`feature/...`), unida a `main` con pull request.
+- Ramas:
+  - `main`: versión estable. Solo recibe cambios cuando todo está probado y funcionando.
+  - `develop`: integración. Aquí se juntan los avances de los dos integrantes.
+  - `dev-nicolas` y `dev-santiago`: ramas de trabajo de cada integrante. Salen de `develop` y vuelven a ella con un pull request.
+- Flujo: `dev-<nombre>` → pull request a `develop` → revisión del compañero → `develop` → `main` cuando todo funciona.
+- Antes de trabajar, actualizar la rama propia con lo último de `develop` (`git pull origin develop`).
 - Cada mensaje de commit lleva la clave de Jira, por ejemplo: `SITDE-22: configuración con variables de entorno`.
