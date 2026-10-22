@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Iniciar sesión · SITDE{% endblock %}
+{% block clase_main %}pantalla-login{% endblock %}
+
+{% block contenido %}
+<section class="tarjeta tarjeta-login" aria-labelledby="titulo-login">
+  <img src="{% static 'img/logo_sitde.png' %}" alt="SITDE, sistema inteligente de apoyo a la toma de decisiones empresariales" class="logo-login">
+  <h1 id="titulo-login">Iniciar sesión</h1>
+
+  {% if form.non_field_errors %}
+  <div class="alerta alerta-error" role="alert">
+    <span aria-hidden="true">⚠</span>
+    {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+
+    <div class="campo">
+      <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+      {{ form.username }}
+    </div>
+
+    <div class="campo">
+      <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+      {{ form.password }}
+    </div>
+
+    <button type="submit" class="boton boton-primario">Ingresar</button>
+  </form>
+</section>
+{% endblock %}

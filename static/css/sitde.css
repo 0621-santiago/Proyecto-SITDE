@@ -1,0 +1,125 @@
+/* Guía de estilo SITDE
+   Colores tomados de la plantilla institucional. Todos los textos
+   cumplen contraste mínimo 4,5:1 (WCAG 2.2, nivel AA). */
+:root {
+  --verde-oscuro: #023A22;
+  --verde: #0F7A3B;
+  --verde-claro: #E6F2EA;
+  --dorado: #D9A21B;
+  --dorado-texto: #8A6100;
+  --dorado-claro: #FBF1D6;
+  --rojo: #A12622;
+  --rojo-claro: #FBE9E8;
+  --texto: #2B3A33;
+  --texto-suave: #55635C;
+  --borde: #D5DED8;
+  --fondo: #F5F7F6;
+  --blanco: #FFFFFF;
+  --radio: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Calibri, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fondo);
+}
+
+h1, h2, h3 { color: var(--verde-oscuro); line-height: 1.2; }
+h1 { font-size: 1.75rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.25rem; margin: 2rem 0 1rem; }
+h3 { font-size: 1.05rem; margin: 0 0 .25rem; }
+
+a { color: var(--verde); }
+
+/* Foco visible para navegar con teclado */
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 3px solid var(--dorado);
+  outline-offset: 2px;
+}
+
+.saltar {
+  position: absolute; left: -999px; top: 0;
+  background: var(--verde-oscuro); color: var(--blanco); padding: .5rem 1rem;
+}
+.saltar:focus { left: 0; }
+
+/* Barra superior */
+.barra {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: .5rem 1.5rem; background: var(--blanco);
+  border-bottom: 1px solid var(--borde);
+}
+.marca img { display: block; }
+.menu { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+.menu a { text-decoration: none; font-weight: 600; color: var(--verde-oscuro); }
+.menu a:hover { text-decoration: underline; }
+.sesion { margin-left: auto; display: flex; align-items: center; gap: 1rem; color: var(--texto-suave); }
+.sesion form { margin: 0; }
+
+.contenido { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+.subtitulo { color: var(--texto-suave); margin-top: 0; }
+
+/* Botones */
+.boton {
+  display: inline-block; border-radius: var(--radio); padding: .6rem 1.2rem;
+  font: inherit; font-weight: 600; cursor: pointer; text-decoration: none;
+  border: 2px solid var(--verde);
+}
+.boton-primario { background: var(--verde); color: var(--blanco); }
+.boton-primario:hover { background: var(--verde-oscuro); border-color: var(--verde-oscuro); }
+.boton-secundario { background: var(--blanco); color: var(--verde); }
+
+/* Tarjetas */
+.tarjeta {
+  background: var(--blanco); border: 1px solid var(--borde);
+  border-radius: var(--radio); padding: 2rem;
+}
+
+/* Pantalla de inicio de sesión */
+.pantalla-login {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--verde-oscuro), var(--verde));
+}
+.tarjeta-login { width: 100%; max-width: 380px; }
+.logo-login { display: block; width: 180px; height: auto; margin: 0 auto 1rem; }
+.tarjeta-login h1 { text-align: center; margin-bottom: 1.5rem; }
+.tarjeta-login .boton { width: 100%; margin-top: .5rem; }
+
+/* Formularios: cada campo tiene su etiqueta visible */
+.campo { margin-bottom: 1rem; }
+.campo label { display: block; font-weight: 600; margin-bottom: .3rem; }
+.campo input {
+  width: 100%; padding: .6rem .75rem; font: inherit; color: var(--texto);
+  border: 1px solid #8A958F; border-radius: 8px; background: var(--blanco);
+}
+
+/* Alertas: siempre con ícono y texto, nunca solo color */
+.alerta {
+  display: flex; gap: .6rem; align-items: flex-start;
+  border-radius: 8px; padding: .75rem 1rem; margin-bottom: 1rem;
+}
+.alerta p { margin: 0; }
+.alerta-error { background: var(--rojo-claro); color: var(--rojo); border: 1px solid var(--rojo); }
+.alerta-aviso { background: var(--dorado-claro); color: var(--dorado-texto); border: 1px solid var(--dorado); }
+
+/* Módulos del menú principal */
+.modulos {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.modulo {
+  background: var(--blanco); border: 1px solid var(--borde);
+  border-radius: var(--radio); padding: 1.25rem;
+}
+.modulo p { color: var(--texto-suave); margin: 0 0 1rem; }
+.etiqueta {
+  display: inline-block; font-size: .85rem; font-weight: 600;
+  color: var(--dorado-texto); background: var(--dorado-claro);
+  border-radius: 999px; padding: .15rem .6rem;
+}

@@ -1,0 +1,46 @@
+{% load static %}<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}SITDE{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/sitde.css' %}">
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  {% if user.is_authenticated %}
+  <header class="barra">
+    <a class="marca" href="{% url 'inicio' %}">
+      <img src="{% static 'img/logo_sitde.png' %}" alt="SITDE" height="40">
+    </a>
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+        {% if es_administrador %}
+        <li><a href="{% url 'admin:auth_user_changelist' %}">Usuarios y roles</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <div class="sesion">
+      <span>{{ user.get_full_name|default:user.username }}{% if rol_usuario %} · {{ rol_usuario }}{% endif %}</span>
+      <form method="post" action="{% url 'cerrar_sesion' %}">
+        {% csrf_token %}
+        <button type="submit" class="boton boton-secundario">Cerrar sesión</button>
+      </form>
+    </div>
+  </header>
+  {% endif %}
+
+  <main id="contenido" class="{% block clase_main %}contenido{% endblock %}">
+    {% if messages %}
+    <div class="mensajes" role="status">
+      {% for mensaje in messages %}
+      <p class="mensaje mensaje-{{ mensaje.tags }}">{{ mensaje }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% block contenido %}{% endblock %}
+  </main>
+</body>
+</html>
