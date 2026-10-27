@@ -10,29 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-import os
 from pathlib import Path
-
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Las credenciales viven en el archivo .env (no se sube a Git).
-# Copia .env.example como .env y pon tus propios datos.
-load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = 'django-insecure-bjn(dxebl=dyz@)(*y!1e+v2iltoj%#5^zau4pr*w+0=%ioai@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -44,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cuentas.apps.CuentasConfig', 
     'inventario',
-    'cuentas',
 ]
 
 MIDDLEWARE = [
@@ -85,20 +78,13 @@ WSGI_APPLICATION = 'sitde_rott.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'DB_SITDE'),
-        'USER': os.environ.get('DB_USER', ''),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'NAME': 'DB_SITDE',
+        'USER': 'postgres',          
+        'PASSWORD': 'admin', 
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
-# Opcional: DB_ENGINE=sqlite en el .env para probar rápido sin PostgreSQL.
-if os.environ.get('DB_ENGINE') == 'sqlite':
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
 
 
 # Password validation
@@ -136,9 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
-# Inicio de sesión (HU-01)
-LOGIN_URL = 'iniciar_sesion'
+# Authentication redirects
+
 LOGIN_REDIRECT_URL = 'inicio'
+LOGIN_URL = 'iniciar_sesion'
 LOGOUT_REDIRECT_URL = 'iniciar_sesion'
