@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario de Productos</title>
+    <link rel="stylesheet" href="{% static 'css/sitde.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inventario/inventario.css' %}">
+</head>
+<body>
+    <div class="contenedor-inventario">
+        <h1 class="titulo-inventario">Inventario de Productos</h1>
+
+       
+        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; border-bottom: 1px solid var(--borde); padding-bottom: 1rem;">
+            <a href="{% url 'lista_empresas' %}" class="boton" style="background-color: #e2e8f0; color: #334155; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Empresas</a>
+            <a href="{% url 'lista_productos' %}" class="boton" style="background-color: var(--verde-oscuro); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Productos</a>
+            <a href="/" class="boton" style="background-color: transparent; color: var(--verde-oscuro); text-decoration: none; padding: 0.5rem 1rem;">← Volver al Inicio</a>
+        </div>
+
+        <ul class="lista-empresas">
+            {% for producto in productos %}
+                <li class="empresa-item" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>{{ producto.nombre }}</strong> - Precio: ${{ producto.precio }} - Stock: {{ producto.stock }}
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'editar_producto' producto.pk %}" class="btn-accion btn-editar">Editar</a>
+                        <a href="{% url 'eliminar_producto' producto.pk %}" class="btn-accion btn-eliminar">Eliminar</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="sin-empresas">No hay productos registrados todavía.</li>
+            {% endfor %}
+        </ul>
+
+        <div style="margin-bottom: 1.5rem;">
+            <a href="{% url 'crear_producto' %}" class="boton" style="background-color: var(--verde-oscuro); color: white; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 6px; display: inline-block;">+ Registrar Nuevo Producto</a>
+        </div>
+
+        <p style="margin-top: 1.5rem;">
+            <a href="{% url 'lista_empresas' %}">← Volver a Empresas</a>
+        </p>
+    </div>
+</body>
+</html>

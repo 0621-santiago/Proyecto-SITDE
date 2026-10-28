@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empresas</title>
+    <!-- 1. Estilos generales de SITDE (para las variables de color) -->
+    <link rel="stylesheet" href="{% static 'css/sitde.css' %}">
+    <!-- 2. Estilos específicos del módulo de inventario -->
+    <link rel="stylesheet" href="{% static 'css/inventario/inventario.css' %}">
+</head>
+<body>
+    <div class="contenedor-inventario">
+        <h1 class="titulo-inventario">¡Bienvenido a la sección de Inventario - Lista de Empresas!</h1>
+
+        <!-- Menú de navegación interno del módulo -->
+        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; border-bottom: 1px solid var(--borde); padding-bottom: 1rem;">
+            <a href="{% url 'lista_empresas' %}" class="boton" style="background-color: var(--verde-oscuro); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Empresas</a>
+            <a href="{% url 'lista_productos' %}" class="boton" style="background-color: #e2e8f0; color: #334155; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Productos</a>
+            <a href="/" class="boton" style="background-color: transparent; color: var(--verde-oscuro); text-decoration: none; padding: 0.5rem 1rem;">← Volver al Inicio</a>
+        </div>
+
+
+        <ul class="lista-empresas">
+            {% for empresa in empresas %}
+                <li class="empresa-item" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>{{ empresa.nombre }}</strong> - NIT: {{ empresa.nit }} - Municipio: {{ empresa.municipio }}
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a href="{% url 'editar_empresa' empresa.pk %}" class="btn-accion btn-editar">Editar</a>
+                        <a href="{% url 'eliminar_empresa' empresa.pk %}" class="btn-accion btn-eliminar">Eliminar</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="sin-empresas">No hay empresas registradas todavía.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div style="margin-bottom: 1.5rem;">
+    <a href="{% url 'crear_empresa' %}" class="boton boton-primario">+ Registrar Nueva Empresa</a>
+</div>
+</body>
+</html>
