@@ -1,0 +1,80 @@
+/* Estilos especificos para el modulo de Inventario */
+.contenedor-inventario {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.titulo-inventario {
+    color: var(--verde-oscuro);
+    font-size: 1.75rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--verde-claro);
+    padding-bottom: 0.75rem;
+}
+
+.lista-empresas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.empresa-item {
+    background: var(--fondo);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+}
+
+.empresa-item:hover {
+    border-color: var(--verde);
+}
+
+.empresa-item strong {
+    color: var(--verde-oscuro);
+    font-size: 1.1rem;
+}
+
+.sin-empresas {
+    color: var(--texto-suave);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Estilos para los botones de acción en las listas */
+.btn-accion {
+    text-decoration: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    display: inline-block;
+}
+
+.btn-editar {
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+.btn-editar:hover {
+    background-color: #cbd5e1;
+}
+
+.btn-eliminar {
+    background-color: transparent;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+}
+
+.btn-eliminar:hover {
+    background-color: #f1f5f9;
+    color: #475569;
+}

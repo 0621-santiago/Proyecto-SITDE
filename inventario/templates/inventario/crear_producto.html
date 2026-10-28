@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Producto</title>
+    <link rel="stylesheet" href="{% static 'css/sitde.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inventario/inventario.css' %}">
+</head>
+<body>
+    <div class="contenedor-inventario">
+        <h1 class="titulo-inventario">Registrar Nuevo Producto</h1>
+
+        <form method="post" class="formulario-inventario">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="boton" style="background-color: var(--verde-oscuro); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer;">Guardar Producto</button>
+        </form>
+
+        <p style="margin-top: 1.5rem;">
+            <a href="{% url 'lista_productos' %}">← Volver a la lista de productos</a>
+        </p>
+    </div>
+</body>
+</html>
