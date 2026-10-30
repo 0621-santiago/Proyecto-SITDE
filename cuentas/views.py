@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from .forms import FormularioInicioSesion, FormularioRegistro
 
@@ -26,6 +27,11 @@ def registrar_usuario(request):
         form = FormularioRegistro(request.POST)
         if form.is_valid():
             user = form.save()
+            
+            # Asignar automáticamente el rol de Empresario
+            grupo_empresario, _ = Group.objects.get_or_create(name='Empresarios')
+            user.groups.add(grupo_empresario)
+
             # Iniciar sesión automáticamente después de registrarse
             login(request, user)
             messages.success(request, f'¡Cuenta creada con éxito! Bienvenido, {user.first_name or user.username}.')
@@ -41,4 +47,14 @@ def registrar_usuario(request):
 @login_required
 def inicio(request):
     """Menú principal. Las opciones cambian según el rol del usuario."""
-    return render(request, 'cuentas/inicio.html')
+    es_admin = request.user.groups.filter(name='Administradores').exists() or request.user.is_superuser
+    es_empresario = request.user.groups.filter(name='Empresarios').exists()
+
+    # Esto imprimirá en tu terminal de VS Code qué rol tiene el usuario conectado
+    print(f"DEBUG -> Usuario: {request.user.username} | es_admin: {es_admin} | es_empresario: {es_empresario}")
+
+    contexto = {
+        'es_admin': es_admin,
+        'es_empresario': es_empresario,
+    }
+    return render(request, 'cuentas/inicio.html', contexto)

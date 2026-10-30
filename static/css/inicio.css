@@ -1,0 +1,94 @@
+/* =========================================
+   ESTILOS PARA EL MÓDULO DE INICIO (TARJETAS)
+   ========================================= */
+
+.contenedor-inicio {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.inicio-header {
+    margin-bottom: 2rem;
+}
+
+.inicio-titulo {
+    color: #0e402d;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.inicio-rol {
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.alerta-rol-advertencia {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #ffeeba;
+}
+
+.inicio-seccion-titulo {
+    color: #0e402d;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+/* Cuadrícula de Tarjetas Moderna */
+.grid-modulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarjeta-modulo {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tarjeta-titulo {
+    color: #0e402d;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.tarjeta-descripcion {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.tarjeta-boton {
+    align-self: flex-start;
+    background-color: #0e402d;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.tarjeta-boton:hover {
+    background-color: #12553b;
+}
+
+.tarjeta-badge {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-block;
+}

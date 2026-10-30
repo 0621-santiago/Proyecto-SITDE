@@ -3,44 +3,46 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inventario de Productos</title>
+    <title>Lista de Productos</title>
+    <!-- 1. Estilos generales de SITDE (para las variables de color) -->
     <link rel="stylesheet" href="{% static 'css/sitde.css' %}">
+    <!-- 2. Estilos específicos del módulo de inventario -->
     <link rel="stylesheet" href="{% static 'css/inventario/inventario.css' %}">
 </head>
 <body>
     <div class="contenedor-inventario">
-        <h1 class="titulo-inventario">Inventario de Productos</h1>
+        <h1 class="titulo-inventario">¡Bienvenido a la sección de Inventario - Productos!</h1>
 
-       
-        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; border-bottom: 1px solid var(--borde); padding-bottom: 1rem;">
-            <a href="{% url 'lista_empresas' %}" class="boton" style="background-color: #e2e8f0; color: #334155; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Empresas</a>
-            <a href="{% url 'lista_productos' %}" class="boton" style="background-color: var(--verde-oscuro); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Productos</a>
-            <a href="/" class="boton" style="background-color: transparent; color: var(--verde-oscuro); text-decoration: none; padding: 0.5rem 1rem;">← Volver al Inicio</a>
+        <!-- Menú de navegación interno del módulo -->
+        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem;">
+            {% if es_admin %}
+                <a href="{% url 'lista_empresas' %}" class="boton" style="background-color: #e2e8f0; color: #333;">Empresas</a>
+            {% endif %}
+            <a href="{% url 'lista_productos' %}" class="boton" style="background-color: var(--color-primario, #0e402d); color: white;">Productos</a>
+            <a href="{% url 'inicio' %}" class="boton" style="background-color: transparent; color: var(--color-primario, #0e402d);">← Volver al Inicio</a>
         </div>
 
-        <ul class="lista-empresas">
+        <!-- Lista de Productos -->
+        <ul class="lista-productos">
             {% for producto in productos %}
-                <li class="empresa-item" style="display: flex; justify-content: space-between; align-items: center;">
+                <li class="producto-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #eee;">
                     <div>
                         <strong>{{ producto.nombre }}</strong> - Precio: ${{ producto.precio }} - Stock: {{ producto.stock }}
                     </div>
                     <div style="display: flex; gap: 0.5rem;">
-                        <a href="{% url 'editar_producto' producto.pk %}" class="btn-accion btn-editar">Editar</a>
-                        <a href="{% url 'eliminar_producto' producto.pk %}" class="btn-accion btn-eliminar">Eliminar</a>
+                        <a href="{% url 'editar_producto' producto.pk %}" class="btn-editar">Editar</a>
+                        <a href="{% url 'eliminar_producto' producto.pk %}" class="btn-eliminar">Eliminar</a>
                     </div>
                 </li>
             {% empty %}
-                <li class="sin-empresas">No hay productos registrados todavía.</li>
+                <li class="sin-productos" style="padding: 1rem;">No hay productos registrados todavía.</li>
             {% endfor %}
         </ul>
 
-        <div style="margin-bottom: 1.5rem;">
-            <a href="{% url 'crear_producto' %}" class="boton" style="background-color: var(--verde-oscuro); color: white; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 6px; display: inline-block;">+ Registrar Nuevo Producto</a>
+        <!-- Botón para registrar nuevo producto -->
+        <div style="margin-top: 1.5rem;">
+            <a href="{% url 'crear_producto' %}" class="boton boton-primario">+ Registrar Nuevo Producto</a>
         </div>
-
-        <p style="margin-top: 1.5rem;">
-            <a href="{% url 'lista_empresas' %}">← Volver a Empresas</a>
-        </p>
     </div>
 </body>
 </html>

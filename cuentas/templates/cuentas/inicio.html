@@ -1,52 +1,88 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block titulo %}Inicio · SITDE{% endblock %}
 
 {% block contenido %}
-<h1>Hola, {{ user.first_name|default:user.username }}</h1>
+<!-- Enlace directo al archivo CSS independiente para forzar su carga -->
+<link rel="stylesheet" href="{% static 'css/inicio.css' %}">
 
-{% if rol_usuario %}
-<p class="subtitulo">Ingresaste como <strong>{{ rol_usuario }}</strong>.</p>
-{% else %}
-<div class="alerta alerta-aviso" role="alert">
-  <span aria-hidden="true">⚠</span>
-  <p>Tu usuario todavía no tiene un rol asignado. Pide al administrador que te asigne uno.</p>
+<div class="contenedor-inicio">
+    <!-- Encabezado de bienvenida -->
+    <div class="inicio-header">
+        <h2 class="inicio-titulo">
+            Hola, {{ request.user.first_name|default:request.user.username }}
+        </h2>
+
+        {% if es_admin %}
+            <p class="inicio-rol">Ingresaste como <strong>Administrador</strong>.</p>
+        {% elif es_empresario %}
+            <p class="inicio-rol">Ingresaste como <strong>Empresario</strong>.</p>
+        {% else %}
+            <div class="alerta-rol-advertencia">
+                ⚠️ Tu usuario todavía no tiene un rol asignado. Pide al administrador que te asigne uno.
+            </div>
+        {% endif %}
+    </div>
+
+    <h3 class="inicio-seccion-titulo">Módulos del Sistema</h3>
+
+    <!-- Cuadrícula de Tarjetas -->
+    <div class="grid-modulos">
+        
+        {% if es_admin %}
+            <!-- Tarjeta Usuarios y roles -->
+            <div class="tarjeta-modulo">
+                <div>
+                    <h4 class="tarjeta-titulo">Usuarios y roles</h4>
+                    <p class="tarjeta-descripcion">Registrar usuarios y asignar perfiles en el sistema.</p>
+                </div>
+                <a href="#" class="tarjeta-boton">Abrir</a>
+            </div>
+        {% endif %}
+
+        {% if es_admin or es_empresario %}
+            <!-- Tarjeta Mi empresa -->
+            <div class="tarjeta-modulo">
+                <div>
+                    <h4 class="tarjeta-titulo">Mi empresa</h4>
+                    <p class="tarjeta-descripcion">Consulta los datos básicos e información del negocio.</p>
+                </div>
+                {% if es_admin %}
+                    <a href="{% url 'lista_empresas' %}" class="tarjeta-boton">Abrir</a>
+                {% else %}
+                    <span class="tarjeta-badge">Asignado</span>
+                {% endif %}
+            </div>
+
+            <!-- Tarjeta Inventario -->
+            <div class="tarjeta-modulo">
+                <div>
+                    <h4 class="tarjeta-titulo">Inventario</h4>
+                    <p class="tarjeta-descripcion">Administra tus productos, lotes y el stock disponible.</p>
+                </div>
+                <a href="{% url 'lista_productos' %}" class="tarjeta-boton">Abrir</a>
+            </div>
+
+            <!-- Tarjeta Alertas -->
+            <div class="tarjeta-modulo">
+                <div>
+                    <h4 class="tarjeta-titulo">Alertas</h4>
+                    <p class="tarjeta-descripcion">Control de vencimientos y stock por debajo del mínimo.</p>
+                </div>
+                <span class="tarjeta-badge">En desarrollo</span>
+            </div>
+
+            <!-- Tarjeta Indicadores -->
+            <div class="tarjeta-modulo">
+                <div>
+                    <h4 class="tarjeta-titulo">Indicadores</h4>
+                    <p class="tarjeta-descripcion">Dashboard visual con los KPIs principales del negocio.</p>
+                </div>
+                <span class="tarjeta-badge">En desarrollo</span>
+            </div>
+        {% endif %}
+
+    </div>
 </div>
-{% endif %}
-
-<section aria-labelledby="titulo-modulos">
-  <h2 id="titulo-modulos">Módulos</h2>
-  <ul class="modulos">
-    {% if es_administrador %}
-    <li class="modulo">
-      <h3>Usuarios y roles</h3>
-      <p>Registrar usuarios y asignar perfiles.</p>
-      <a class="boton boton-primario" href="{% url 'admin:auth_user_changelist' %}">Abrir</a>
-    </li>
-    {% endif %}
-    {% if rol_usuario %}
-    <li class="modulo modulo-pendiente">
-      <h3>Mi empresa</h3>
-      <p>Datos básicos del negocio.</p>
-      <span class="etiqueta">En desarrollo</span>
-    </li>
-    <li class="modulo">
-    <h3>Inventario</h3>
-    <p>Productos, lotes y stock disponible.</p>
-    <span class="etiqueta">En desarrollo</span>
-    <a class="boton boton-primario" href="/inventario/">Abrir</a>
-</li>
-    <li class="modulo modulo-pendiente">
-      <h3>Alertas</h3>
-      <p>Vencimientos y stock por debajo del mínimo.</p>
-      <span class="etiqueta">En desarrollo</span>
-    </li>
-    <li class="modulo modulo-pendiente">
-      <h3>Indicadores</h3>
-      <p>Dashboard con los KPIs del negocio.</p>
-      <span class="etiqueta">En desarrollo</span>
-    </li>
-    {% endif %}
-  </ul>
-</section>
 {% endblock %}
