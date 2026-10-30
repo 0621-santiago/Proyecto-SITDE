@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Crear Cuenta · SITDE{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login/login.css' %}">
+{% endblock %}
+
+{% block clase_main %}pantalla-login{% endblock %}
+
+{% block contenido %}
+<section class="tarjeta tarjeta-login" aria-labelledby="titulo-registro">
+    <img src="{% static 'img/logo_sitde.png' %}" alt="SITDE" style="width: 110px; max-width: 100%; height: auto; display: block; margin: 0 auto 15px auto;">
+    <h1 id="titulo-registro">Crear Cuenta</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alerta alerta-error" role="alert">
+                <span>⚠️</span> {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="campo" style="margin-bottom: 12px;">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <small style="color: #dc3545; font-size: 0.8rem;">{{ field.errors.0 }}</small>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="boton boton-primario" style="margin-top: 10px;">Registrarse</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
+        ¿Ya tienes una cuenta? <a href="{% url 'iniciar_sesion' %}" style="color: #1b7a4b; font-weight: 600;">Inicia sesión aquí</a>
+    </p>
+</section>
+{% endblock %}
