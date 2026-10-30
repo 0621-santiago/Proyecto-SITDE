@@ -1,0 +1,115 @@
+/* ===================================================
+   Estilos específicos para la pantalla de Login (SITDE)
+   =================================================== */
+
+.pantalla-login {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Tarjeta principal contenedora */
+.tarjeta-login {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-top: 5px solid #d4af37; /* Dorado institucional */
+}
+
+/* Control estricto del tamaño del logo */
+.tarjeta-login img {
+    display: block;
+    width: 130px;        /* Tamaño fijo controlado */
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 1rem auto;
+}
+
+.tarjeta-login h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0a3a2a; /* Verde oscuro institucional */
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Alerta de Error */
+.alerta-error {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Estructura de Formulario y Campos */
+.tarjeta-login form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.tarjeta-login .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.tarjeta-login label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Inputs con estados interactivos */
+.tarjeta-login input[type="text"],
+.tarjeta-login input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #dcdfe6;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: #f9fafb;
+}
+
+.tarjeta-login input[type="text"]:focus,
+.tarjeta-login input[type="password"]:focus {
+    border-color: #1b7a4b; /* Verde principal */
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3.5px rgba(27, 122, 75, 0.15);
+}
+
+/* Botón de envío */
+.tarjeta-login .boton-primario {
+    width: 100%;
+    padding: 0.85rem;
+    background: linear-gradient(135deg, #1b7a4b, #0a3a2a);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 12px rgba(27, 122, 75, 0.3);
+}
+
+.tarjeta-login .boton-primario:hover {
+    background: linear-gradient(135deg, #28a745, #1b7a4b);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(27, 122, 75, 0.4);
+}

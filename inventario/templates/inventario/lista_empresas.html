@@ -14,31 +14,36 @@
         <h1 class="titulo-inventario">¡Bienvenido a la sección de Inventario - Lista de Empresas!</h1>
 
         <!-- Menú de navegación interno del módulo -->
-        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; border-bottom: 1px solid var(--borde); padding-bottom: 1rem;">
-            <a href="{% url 'lista_empresas' %}" class="boton" style="background-color: var(--verde-oscuro); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Empresas</a>
-            <a href="{% url 'lista_productos' %}" class="boton" style="background-color: #e2e8f0; color: #334155; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">Productos</a>
-            <a href="/" class="boton" style="background-color: transparent; color: var(--verde-oscuro); text-decoration: none; padding: 0.5rem 1rem;">← Volver al Inicio</a>
+        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem;">
+            <a href="{% url 'lista_empresas' %}" class="boton" style="background-color: var(--color-primario, #0e402d); color: white;">Empresas</a>
+            <a href="{% url 'lista_productos' %}" class="boton" style="background-color: #e2e8f0; color: #333;">Productos</a>
+            <a href="{% url 'inicio' %}" class="boton" style="background-color: transparent; color: var(--color-primario, #0e402d);">← Volver al Inicio</a>
         </div>
-
 
         <ul class="lista-empresas">
             {% for empresa in empresas %}
-                <li class="empresa-item" style="display: flex; justify-content: space-between; align-items: center;">
+                <li class="empresa-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #eee;">
                     <div>
                         <strong>{{ empresa.nombre }}</strong> - NIT: {{ empresa.nit }} - Municipio: {{ empresa.municipio }}
                     </div>
                     <div style="display: flex; gap: 0.5rem;">
-                        <a href="{% url 'editar_empresa' empresa.pk %}" class="btn-accion btn-editar">Editar</a>
-                        <a href="{% url 'eliminar_empresa' empresa.pk %}" class="btn-accion btn-eliminar">Eliminar</a>
+                        <a href="{% url 'editar_empresa' empresa.pk %}" class="btn-editar">Editar</a>
+                        {% if es_admin %}
+                            <a href="{% url 'eliminar_empresa' empresa.pk %}" class="btn-eliminar">Eliminar</a>
+                        {% endif %}
                     </div>
                 </li>
             {% empty %}
-                <li class="sin-empresas">No hay empresas registradas todavía.</li>
+                <li class="sin-empresas" style="padding: 1rem;">No hay empresas registradas todavía.</li>
             {% endfor %}
         </ul>
+
+        <!-- Botón de registrar empresa protegido solo para administradores -->
+        {% if es_admin %}
+        <div style="margin-top: 1.5rem;">
+            <a href="{% url 'crear_empresa' %}" class="boton boton-primario">+ Registrar Nueva Empresa</a>
+        </div>
+        {% endif %}
     </div>
-    <div style="margin-bottom: 1.5rem;">
-    <a href="{% url 'crear_empresa' %}" class="boton boton-primario">+ Registrar Nueva Empresa</a>
-</div>
 </body>
 </html>
