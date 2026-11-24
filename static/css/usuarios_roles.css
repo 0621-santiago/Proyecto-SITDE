@@ -1,0 +1,87 @@
+.ur-contenedor {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.ur-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.ur-titulo {
+    color: #0e402d;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.ur-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.ur-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.ur-campo {
+    margin-bottom: 1rem;
+}
+
+.ur-campo label {
+    display: block;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.35rem;
+}
+
+.ur-campo input,
+.ur-campo select {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+.ur-btn {
+    background-color: #0e402d;
+    color: #ffffff;
+    border: none;
+    padding: 0.55rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.ur-btn:hover {
+    background-color: #12553b;
+}
+
+.ur-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ur-tabla th,
+.ur-tabla td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.ur-form-inline {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}

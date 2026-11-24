@@ -18,7 +18,7 @@
       <ul class="menu">
         <li><a href="{% url 'inicio' %}">Inicio</a></li>
         {% if es_administrador %}
-        <li><a href="{% url 'admin:auth_user_changelist' %}">Usuarios y roles</a></li>
+        <li><a href="{% url 'usuarios_roles' %}">Usuarios y roles</a></li>
         {% endif %}
       </ul>
     </nav>
